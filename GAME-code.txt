@@ -1,0 +1,1776 @@
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+
+
+class rpgPanels extends JPanel implements KeyListener {
+
+    BufferedImage img;
+    BufferedImage[][] subImages;
+    final static String imgPath = "C:\\Users\\dell.000\\Desktop\\GAMEtiles.png";
+    final static int ROWS = 8;
+    final static int COLS = 3;
+    final static int WIDTH = 47;
+    static int doorCode1 = 1;
+    static int doorCode2 = 1;
+    static int doorCode3 = 1;
+    static int doorCode4 = 1;
+    static int ending = 0;
+    final static int HEIGHT = 23;
+    static int x, y, d, yz;
+    static int textRemover = 1, textRemover2 = 1;
+    static int virusCount = 0;
+    static int xpyz = 713;
+    static int xpyz1 = 220;
+    static int xpyz2 = 260;
+    static int xpyz3 = 300;
+    static int xpyz4 = 340;
+    static int days = 0;
+    int direction;
+    static String mother = "";
+    static String regen = "";
+    static String goodluck = "";
+    static String howw = "";
+    static String brother = "You cant go outside";
+    static String sister = "You cant go outasdfadfasdfside";
+    static String starting = "COVID-19";
+    static String startingOptions = "space = START/RESTART      I = INSTRUCTION    S = STOP/PAUSE";
+    static int bolsX = 300, bolsY = 350, bolsX2 = 200, bolsX3 = 120, bolsY2 = 400, bolsY3 = 55 , bolsX4 = 330 , bolsY4 = 330,bolsX5 = 160, bolsY5 = 390;
+    static int level = 1;
+    static int lives = 3;
+    static int xp, yp;
+    static int health = 25;
+    static int pera = -10;
+    static int damage = 10;
+    static int swordOption;
+    static String statusDays = "DAYS: " + days;
+    static String lowHP = "You need to regen go to your room";
+    static String statusHealth = "HP: " + health;
+    static String statusMoney = "MONEY: " + pera;
+    static String dead = "";
+    static String playy = "";
+    static String keys = "";
+    static String instruct = "";
+    private boolean stopped;
+    private boolean paused;
+    static String deadButton = "";
+    static String congrats = "";
+    static String statusDoor1 = "";
+    static String statusDoor2 = "";
+    static String statusDoor3 = "";
+    static String statusDoor4 = "";
+
+    rpgPanels() {
+        subImages = new BufferedImage[ROWS][COLS];
+        direction = KeyEvent.VK_RIGHT;
+        this.addKeyListener(this);
+        this.stopped = false;
+        this.paused = false;
+
+        x = y = 0;
+        xp = 40;
+        yp = 40;
+        d = 15;
+
+        try {
+
+            for (int i = 0; i < ROWS; i++) {
+                for (int j = 0; j < COLS; j++) {
+
+                    img = ImageIO.read(new File(imgPath));
+                    subImages[i][j] = img.getSubimage(j * 90, i * 28, WIDTH, HEIGHT);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Exception" + e.toString());
+        }
+
+    }
+
+    public void paint(Graphics g) {
+        super.paint(g);
+           if (ending >= 2) {
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Gill Sans", Font.PLAIN, 50));
+            congrats = "CONGRATULATION";
+            g.drawString(congrats, 150, 320);
+            g.setFont(new Font("Gill Sans", Font.PLAIN, 15));
+            g.drawString(deadButton,150,420);
+        } else if(days <= 0){
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Gill Sans", Font.PLAIN, 100));
+        g.drawString(starting, 180, 270);
+        g.setFont(new Font("Gill Sans", Font.PLAIN, 20));
+        g.drawString(startingOptions, 100, 470);
+        g.drawString(howw, 180, 430);
+        g.drawString(instruct, 180, 490);
+        g.drawString(regen, 180, 450);
+        g.drawString(goodluck, 180, 510);
+        g.drawString(playy,180,530);
+            
+        }else{
+        //1stwall
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 335, null);
+        g.drawImage(subImages[4][01], -5 + 40, 340, null);
+        g.drawImage(subImages[4][01], -5 + 40, 350, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40, 470, null);
+
+        //1stwall
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 335, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 345, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 355, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40, 470, null);
+
+        //1stwall
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 335, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 345, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 355, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40, 470, null);
+
+        //1stwall
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 335, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 345, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 355, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40, 470, null);
+
+        //1stwall
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 335, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 345, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 355, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40, 470, null);
+        //1stwall
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 335, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 345, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 355, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40, 470, null);
+        //1st wall
+
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 335, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 345, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 355, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 470, null);
+        //1st wall  
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 335, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 345, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 355, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 470, null);
+        //1st wall  
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 335, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 345, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 355, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 470, null);
+
+        //1st wall  
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 335, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 345, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 355, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 470, null);
+        //1st wall  
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 335, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 345, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 355, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 470, null);
+        //1st wall  
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 335, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 345, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 355, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 470, null);
+//1st wall  
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 335, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 345, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 355, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 470, null);
+        //1st wall  
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 335, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 345, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 355, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 470, null);
+        //1st wall  
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 335, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 345, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 355, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 470, null);
+
+        //1st wall  
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 335, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 345, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 355, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 470, null);
+
+        //1st wall  
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 335, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 345, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 355, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 470, null);
+
+        //1st wall  
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 335, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 345, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 355, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 470, null);
+
+        //1st wall  
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 335, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 345, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 355, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 470, null);
+
+        //1st wall  
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 335, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 345, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 355, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 470, null);
+
+        //1st wall  
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 35 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 45, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 70 - 10, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 90 - 20, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 110 - 30, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130 - 40, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150 - 50, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170 - 60, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190 - 70, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 130, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 140, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 150, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 160, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 170, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 180, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 190, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 200, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 210, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 220, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 230, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 240, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 250, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 260, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 270, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 280, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 290, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 300, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 310, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 325, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 335, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 345, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 355, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 365, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 380, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 395, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 410, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 425, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 440, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 455, null);
+        g.drawImage(subImages[4][01], 0 - 5 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40 + 40, 470, null);
+
+        //upper walls
+        g.drawImage(subImages[4][2], -5, 0, null);
+        g.drawImage(subImages[4][2], 355, 0, null);
+        g.drawImage(subImages[4][2], 35, 0, null);
+        g.drawImage(subImages[4][2], 395, 0, null);
+        g.drawImage(subImages[4][2], 75, 0, null);
+        g.drawImage(subImages[4][2], 435, 0, null);
+        g.drawImage(subImages[4][2], 115, 0, null);
+        g.drawImage(subImages[4][02], 475, 0, null);
+        g.drawImage(subImages[4][02], 155, 0, null);
+        g.drawImage(subImages[4][02], 515, 0, null);
+        g.drawImage(subImages[4][02], 195, 0, null);
+        g.drawImage(subImages[4][02], 555, 0, null);
+        g.drawImage(subImages[4][02], 235, 0, null);
+        g.drawImage(subImages[4][02], 595, 0, null);
+        g.drawImage(subImages[4][02], 275, 0, null);
+        g.drawImage(subImages[4][02], 635, 0, null);
+        g.drawImage(subImages[4][02], 315, 0, null);
+        g.drawImage(subImages[4][02], 675, 0, null);
+        g.drawImage(subImages[4][02], 715, 0, null);
+        g.drawImage(subImages[4][02], 755, 0, null);
+        g.drawImage(subImages[4][02], 780, 0, null);
+
+        //tao
+        if (days >= 30) {
+
+            g.setColor(Color.BLACK);
+            g.setFont(new Font("Gill Sans", Font.PLAIN, 15));
+            g.drawImage(subImages[7][1], 250, 250, null);
+            g.drawImage(subImages[7][2], 250, 300, null);
+            congrats = "Virus has been defeated";
+            g.drawString(congrats, 250, 520);
+            sister = "";
+            brother = "";
+            mother = "";
+            bolsX = 1000;
+            bolsY = 1000;
+            bolsX2 = 1000;
+            bolsY2 = 1000;
+            bolsX3 = 1000;
+            bolsY3 = 1000;
+            bolsX4 = 1000;
+            bolsY4 = 1000;
+            bolsX5 = 1000;
+            bolsY5 = 1000;
+            lowHP = "";
+
+        } else {
+
+            //brother
+            g.drawImage(subImages[7][2], 700, 25, null);
+            //door1Status
+            if (((xp <= 160) && (yp <= 224 && yp >= 206)) && doorCode1 == 1) {
+                statusDoor1 = "$100      -1 damage";
+                g.setColor(Color.BLACK);
+                g.setFont(new Font("Gill Sans", Font.PLAIN, 15));
+                g.drawString(statusDoor1, 240, 520);
+                lowHP = "";
+                sister = "";
+            } else {
+
+                g.setColor(Color.BLACK);
+                g.setFont(new Font("Gill Sans", Font.PLAIN, 15));
+                g.drawString(statusDoor1, 240, 520);
+                statusDoor1 = "";
+            }
+            //door2Status
+            if (((xp <= 160) && (yp <= 264 && yp >= 246)) && doorCode2 == 1) {
+                statusDoor1 = "$200      -1 damage";
+
+                g.setColor(Color.BLACK);
+                g.setFont(new Font("Gill Sans", Font.PLAIN, 15));
+                g.drawString(statusDoor2, 240, 520);
+                sister = "";
+                lowHP = "";
+            } else {
+
+                g.setColor(Color.BLACK);
+                g.setFont(new Font("Gill Sans", Font.PLAIN, 15));
+                g.drawString(statusDoor2, 240, 520);
+                statusDoor2 = "";
+            }
+            //door3Status
+            if (((xp <= 160) && (yp >= 291 && yp <= 309)) && doorCode3 == 1) {
+                statusDoor1 = "$300      -1 damage";
+                g.setColor(Color.BLACK);
+                g.setFont(new Font("Gill Sans", Font.PLAIN, 15));
+                g.drawString(statusDoor3, 240, 520);
+                sister = "";
+                lowHP = "";
+            } else {
+
+                g.setColor(Color.BLACK);
+                g.setFont(new Font("Gill Sans", Font.PLAIN, 15));
+                g.drawString(statusDoor3, 240, 520);
+                statusDoor3 = "";
+            }
+            //door4Status
+            if (((xp <= 160) && (yp >= 326 && yp <= 349)) && doorCode4 == 1) {
+
+                statusDoor1 = "$400      -1 damage";
+                g.setColor(Color.BLACK);
+                g.setFont(new Font("Gill Sans", Font.PLAIN, 15));
+                g.drawString(statusDoor4, 240, 520);
+                lowHP = "";
+                sister = "";
+            } else {
+
+                g.setColor(Color.BLACK);
+                g.setFont(new Font("Gill Sans", Font.PLAIN, 15));
+                g.drawString(statusDoor4, 240, 520);
+                statusDoor4 = "";
+            }
+            //door1
+            if (pera >= 100 && ((xp <= 80) && (yp <= 224 && yp >= 206)) && doorCode1 == 1) {
+                pera -= 100;
+                damage -= 1;
+                doorCode1++;
+                xpyz1 = 1000;
+                statusMoney = "Money:" + pera;
+
+            } else {
+                g.drawImage(subImages[4][0], 120 - 5, 220, null);
+            }
+            //door2
+            if (pera >= 200 && ((xp <= 80) && (yp <= 264 && yp >= 246)) && doorCode2 == 1) {
+                pera -= 200;
+                damage -= 1;
+                xpyz2 = 1000;
+                doorCode2++;
+                statusMoney = "Money:" + pera;
+
+            } else {
+                g.drawImage(subImages[4][0], 120 - 5, 260, null);
+            }
+            //door3
+            if (pera >= 300 && ((xp <= 80) && (yp >= 291 && yp <= 309)) && doorCode3 == 1) {
+                pera -= 300;
+                damage -= 1;
+                doorCode3++;
+                xpyz3 = 1000;
+                statusMoney = "Money:" + pera;
+
+            } else {
+                g.drawImage(subImages[4][0], 120 - 5, 300, null);
+
+            }
+            //door4
+            if (pera >= 400 && ((xp <= 80) && (yp >= 326 && yp <= 349)) && doorCode4 == 1) {
+                pera -= 400;
+                damage -= 1;
+                xpyz4 = 1000;
+                doorCode4++;
+                statusMoney = "Money:" + pera;
+
+            } else {
+                g.drawImage(subImages[4][0], 120 - 5, 340, null);
+            }
+            //broom
+            g.drawImage(subImages[6][0], xpyz, 460, null);
+            //mother
+            if (days == 1) {
+                g.drawImage(subImages[7][1], 660, 460, null);
+            }
+        }
+        g.setColor(Color.BLACK);
+
+        g.setFont(new Font("Gill Sans", Font.PLAIN, 15));
+
+        g.drawString(mother, 250, 520);
+
+        g.drawString(keys, 250, 520);
+        g.drawString(mother, 250, 520);
+
+        //bed
+        g.drawImage(subImages[7][0], 20, 20, null);
+        g.drawImage(subImages[7][0], 40, 20, null);
+        //walls ti weapon
+        g.drawImage(subImages[4][2], 40 - 5, 200, null);
+        g.drawImage(subImages[4][2], 80 - 5, 200, null);
+        g.drawImage(subImages[4][2], 120 - 5, 200, null);
+        g.drawImage(subImages[6][1], 40 - 5, xpyz1, null);/*weapon */
+        g.drawImage(subImages[4][2], 40 - 5, 240, null);
+        g.drawImage(subImages[4][2], 80 - 5, 240, null);
+        g.drawImage(subImages[4][2], 120 - 5, 240, null);
+        g.drawImage(subImages[6][2], 40 - 5, xpyz2, null);/*weapon2*/
+        g.drawImage(subImages[4][2], 40 - 5, 280, null);
+        g.drawImage(subImages[4][2], 80 - 5, 280, null);
+        g.drawImage(subImages[4][2], 120 - 5, 280, null);
+        g.drawImage(subImages[5][0], 40 - 5, xpyz3, null);/*weapon3*/
+        g.drawImage(subImages[4][2], 40 - 5, 320, null);
+        g.drawImage(subImages[4][2], 80 - 5, 320, null);
+        g.drawImage(subImages[4][2], 120 - 5, 320, null);
+        g.drawImage(subImages[5][2], 40 - 5, xpyz4, null);/*weapon4*/
+        g.drawImage(subImages[4][2], 40 - 5, 360, null);
+        g.drawImage(subImages[4][2], 80 - 5, 360, null);
+        g.drawImage(subImages[4][2], 120 - 5, 360, null);
+
+        //walls ni brother
+        g.drawImage(subImages[4][2], 630, 45, null);
+        g.drawImage(subImages[4][2], 660, 45, null);
+        g.drawImage(subImages[4][2], 690, 45, null);
+        g.drawImage(subImages[4][2], 720, 45, null);
+        //walls ni mother
+        g.drawImage(subImages[4][2], 630, 435, null);
+        g.drawImage(subImages[4][2], 660, 435, null);
+        g.drawImage(subImages[4][2], 690, 435, null);
+        g.drawImage(subImages[4][2], 720, 435, null);
+        g.drawImage(subImages[4][2], 600, 435, null);
+        g.drawImage(subImages[4][2], 570, 435, null);
+        g.drawImage(subImages[4][2], 540, 435, null);
+
+        if (health <= 0) {
+
+        } else {
+            g.drawImage(subImages[x][y], xp, yp, null);
+        }
+        //left walls
+        g.drawImage(subImages[4][02], -5, 0, null);
+        g.drawImage(subImages[4][02], 0 - 5, 35 - 20, null);
+        g.drawImage(subImages[4][02], 0 - 5, 30, null);
+        g.drawImage(subImages[4][02], 0 - 5, 45, null);
+        g.drawImage(subImages[4][02], 0 - 5, 70 - 10, null);
+        g.drawImage(subImages[4][02], 0 - 5, 90 - 20, null);
+        g.drawImage(subImages[4][02], 0 - 5, 110 - 30, null);
+        g.drawImage(subImages[4][02], 0 - 5, 130 - 40, null);
+        g.drawImage(subImages[4][02], 0 - 5, 150 - 50, null);
+        g.drawImage(subImages[4][02], 0 - 5, 170 - 60, null);
+        g.drawImage(subImages[4][02], 0 - 5, 190 - 70, null);
+        g.drawImage(subImages[4][02], 0 - 5, 130, null);
+        g.drawImage(subImages[4][02], 0 - 5, 140, null);
+        g.drawImage(subImages[4][02], 0 - 5, 150, null);
+        g.drawImage(subImages[4][02], 0 - 5, 160, null);
+        g.drawImage(subImages[4][02], 0 - 5, 170, null);
+        g.drawImage(subImages[4][02], 0 - 5, 180, null);
+        g.drawImage(subImages[4][02], 0 - 5, 190, null);
+        g.drawImage(subImages[4][02], 0 - 5, 200, null);
+        g.drawImage(subImages[4][02], 0 - 5, 210, null);
+        g.drawImage(subImages[4][02], 0 - 5, 220, null);
+        g.drawImage(subImages[4][02], 0 - 5, 230, null);
+        g.drawImage(subImages[4][02], 0 - 5, 240, null);
+        g.drawImage(subImages[4][02], 0 - 5, 250, null);
+        g.drawImage(subImages[4][02], 0 - 5, 260, null);
+        g.drawImage(subImages[4][02], 0 - 5, 270, null);
+        g.drawImage(subImages[4][02], 0 - 5, 280, null);
+        g.drawImage(subImages[4][02], 0 - 5, 290, null);
+        g.drawImage(subImages[4][02], 0 - 5, 300, null);
+        g.drawImage(subImages[4][02], 0 - 5, 310, null);
+        g.drawImage(subImages[4][02], 0 - 5, 325, null);
+        g.drawImage(subImages[4][02], 0 - 5, 335, null);
+        g.drawImage(subImages[4][02], -5, 340, null);
+        g.drawImage(subImages[4][02], -5, 350, null);
+        g.drawImage(subImages[4][02], 0 - 5, 365, null);
+        g.drawImage(subImages[4][02], 0 - 5, 380, null);
+        g.drawImage(subImages[4][02], 0 - 5, 395, null);
+        g.drawImage(subImages[4][02], 0 - 5, 410, null);
+        g.drawImage(subImages[4][02], 0 - 5, 425, null);
+        g.drawImage(subImages[4][02], 0 - 5, 440, null);
+        g.drawImage(subImages[4][02], 0 - 5, 455, null);
+        g.drawImage(subImages[4][02], 0 - 5, 470, null);
+        g.drawImage(subImages[4][02], 0 - 5, 485, null);
+        g.drawImage(subImages[4][02], 0 - 5, 500, null);
+        g.drawImage(subImages[4][02], 0 - 5, 515, null);
+        g.drawImage(subImages[4][02], 0 - 5, 530, null);
+        g.drawImage(subImages[4][02], 0 - 5, 545, null);
+        g.drawImage(subImages[4][02], 0 - 5, 560, null);
+        g.drawImage(subImages[4][02], 0 - 5, 575, null);
+        g.drawImage(subImages[4][02], 0 - 5, 580, null);
+        g.drawImage(subImages[4][02], 0 - 5, 595, null);
+
+        //right walls
+        g.drawImage(subImages[4][02], 760, 0, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 35 - 20, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 30, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 45, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 70 - 10, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 90 - 20, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 110 - 30, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 130 - 40, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 150 - 50, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 170 - 60, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 190 - 70, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 130, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 140, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 150, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 160, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 170, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 180, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 190, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 200, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 210, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 220, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 230, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 240, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 250, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 260, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 270, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 280, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 290, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 300, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 310, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 325, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 335, null);
+        g.drawImage(subImages[4][02], 760 + -5, 340, null);
+        g.drawImage(subImages[4][02], 760 + -5, 350, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 365, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 380, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 395, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 410, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 425, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 440, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 455, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 470, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 485, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 500, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 515, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 530, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 545, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 560, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 575, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 580, null);
+        g.drawImage(subImages[4][02], 760 + 0 - 5, 595, null);
+
+        //lower walls
+        g.drawImage(subImages[4][02], -5, 0 + 480, null);
+        g.drawImage(subImages[4][02], 355, 0 + 480, null);
+        g.drawImage(subImages[4][02], 35, 0 + 480, null);
+        g.drawImage(subImages[4][02], 395, 0 + 480, null);
+        g.drawImage(subImages[4][02], 75, 0 + 480, null);
+        g.drawImage(subImages[4][02], 435, 0 + 480, null);
+        g.drawImage(subImages[4][02], 115, 0 + 480, null);
+        g.drawImage(subImages[4][02], 475, 0 + 480, null);
+        g.drawImage(subImages[4][02], 155, 0 + 480, null);
+        g.drawImage(subImages[4][02], 515, 0 + 480, null);
+        g.drawImage(subImages[4][02], 195, 0 + 480, null);
+        g.drawImage(subImages[4][02], 555, 0 + 480, null);
+        g.drawImage(subImages[4][02], 235, 0 + 480, null);
+        g.drawImage(subImages[4][02], 595, 0 + 480, null);
+        g.drawImage(subImages[4][02], 275, 0 + 480, null);
+        g.drawImage(subImages[4][02], 635, 0 + 480, null);
+        g.drawImage(subImages[4][02], 315, 0 + 480, null);
+        g.drawImage(subImages[4][02], 675, 0 + 480, null);
+        g.drawImage(subImages[4][02], 715, 0 + 480, null);
+        g.drawImage(subImages[4][02], 755, 0 + 480, null);
+        g.drawImage(subImages[4][02], 780, 0 + 480, null);
+
+        //door
+        g.drawImage(subImages[4][0], 730, 25, null);
+        g.drawImage(subImages[4][0], 750, 25, null);
+
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Gill Sans", Font.PLAIN, 15));
+        g.drawString(statusHealth, 40, 550);
+        g.drawString(statusMoney, 640, 520);
+        g.drawString(statusDays, 40, 530);
+
+        if (health <= 5) {
+            g.drawString(lowHP, 250, 520);
+        } else if (xp >= 650 && yp <= 25) {
+            g.drawString(brother, 250, 520);
+        } else {
+            g.drawString(sister, 250, 520);
+        }
+        if(health <= 0){
+         xp = xp;
+         yp = yp;
+        
+        }
+        g.setFont(new Font("Gill Sans", Font.PLAIN, 50));
+        g.drawString(dead, 230, 570);
+        g.setFont(new Font("Gill Sans", Font.PLAIN, 10));
+        g.drawString(deadButton, 270, 520);
+        //spider and virus
+        g.drawImage(subImages[5][1], bolsX, bolsY, null);
+        g.drawImage(subImages[5][1], bolsX2, bolsY2, null);
+        g.drawImage(subImages[5][1], bolsX3, bolsY3, null);
+        g.drawImage(subImages[5][1], bolsX4, bolsY4, null);
+        g.drawImage(subImages[5][1], bolsX5, bolsY5, null);
+
+    }
+    }
+    
+
+    public void animate() {
+        y = (y + 1) % 2;
+
+        switch (direction) {
+
+            case KeyEvent.VK_DOWN:
+                //bed
+                if (xp <= 40 && yp <= 35) {
+                    health = 20;
+                    statusHealth = "HP: " + health;
+                }
+                x = 1;
+                //mother's walls
+                if ((yp >= 170 && yp <= 360) && xp <= 140) {
+                    yp = yp;
+                } else if (xp >= 500 && (yp >= 405 && yp <= 430)) {
+                    yp = yp;
+                    y = 1;
+                } //brother's walls
+                else if ((xp >= 590) && (yp <= 40)) {
+
+                    yp = yp;
+                    y = 1;
+
+                } else {
+                    yp = yp + d;
+
+                }
+                //walls
+                if (yp > 465) {
+                    yp = 465;
+                }
+                break;
+
+            case KeyEvent.VK_UP:
+
+                //bed
+                if (xp <= 40 && yp <= 35) {
+                    health = 20;
+                    statusHealth = "HP: " + health;
+                }
+                x = 2;
+
+                //brother's walls
+                if ((yp >= 180 && yp <= 370) && xp <= 145) {
+                    yp = yp;
+                } else if ((xp >= 590) && (yp <= 60)) {
+
+                    yp = yp;
+                    y = 1;
+                    //mother's walls
+                } else if (xp >= 520 && (yp < 455 && yp > 420)) {
+                    yp = yp;
+                    y = 1;
+
+                } else {
+                    yp = yp - d;
+
+                    //walls
+                }
+                if (yp < 20) {
+                    yp = 20;
+                }
+
+                break;
+
+            case KeyEvent.VK_LEFT:
+
+                if (xp <= 40 && yp <= 35) {
+                    health = 20;
+
+                    statusHealth = "HP: " + health;
+
+                }
+                if (xp <= 70 && (yp >= 190 && yp <= 360)) {
+                    xp = xp;
+                } else if ((xp <= 150 && (yp >= 350 && yp <= 370)) || (xp <= 150 && (yp >= 265 && yp <= 290)) || (xp <= 150 && (yp >= 310 && yp <= 325)) || (xp <= 150 && (yp >= 225 && yp <= 245)) || (xp <= 150 && (yp >= 185 && yp <= 205))) {
+                    xp = xp;
+                    //door
+                } else if (pera <= 20 && ((xp <= 150) && (yp <= 224 && yp >= 206))) {
+                    xp = xp;
+                    //door2
+                } else if (pera <= 30 && ((xp <= 150) && (yp <= 264 && yp >= 246))) {
+                    xp = xp;
+                    //door3
+                } else if (pera <= 40 && ((xp <= 150) && (yp >= 291 && yp <= 309))) {
+                    xp = xp;
+                    //door4
+                } else if (pera <= 50 && ((xp <= 150) && (yp >= 326 && yp <= 349))) {
+                    xp = xp;
+
+                } else {
+                    x = 3;
+                    xp = xp - d;
+                }
+                if (xp < 20 + 10) {
+                    xp = 20 + 10;
+
+                }
+                break;
+
+            case KeyEvent.VK_RIGHT:
+                x = 0;
+
+                if (xp <= 40 && yp <= 35) {
+                    health = 20;
+
+                    statusHealth = "HP: " + health;
+                }
+                //brother's walls
+                if (xp >= 595 && (yp <= 50 && yp > 30)) {
+
+                    xp = xp;
+                    y = 1;
+                    //ending 
+                } else if (xp >= 720 && yp <= 40) {
+                    ending += 1;
+                    
+                    //mother's walls 
+                } else if (xp >= 500 && (yp <= 440 && yp > 410)) {
+
+                    xp = xp;
+                    y = 1;
+                    
+                    //brother
+                } else if (xp >= 650 && yp <= 25) {
+                    if (days >= 10) {
+                        xp = xp + d;
+                    } else {
+                        xp = xp;
+                    }
+                    y = 1;
+                    //mother
+                } else if ((xp >= 600 && xp <= 670) && yp >= 420) {
+                    if (days == 1) {
+
+                        xp = xp;
+
+                    } else {
+                        xp = xp + d;
+
+                    }
+                    //key
+                } else if ((xp >= 670 && yp >= 420) && textRemover == 1) {
+                    if (textRemover == 1) {
+                        keys = "You obtained armor";
+                        damage -=5 ;
+                    }
+                    sister = "";
+                    textRemover++;
+                    lowHP = "";
+                    xpyz = 1000;
+                    xp = xp;
+                } else {
+                    keys = "";
+                    mother = "";
+                    sister = "30 days to go out!";
+                    xp = xp + d;
+
+                }
+                if ((xp >= 590 && yp >= 420) && textRemover2 == 1) {
+                    sister = "";
+                    mother = "Ill be buying foods tomorrow";
+                    if (days >= 2) {
+                        textRemover2 += 1;
+                    }
+
+                }
+                //walls
+                if (xp > 720) {
+                    xp = 720;
+                }
+                break;
+            case KeyEvent.VK_I:
+                days = 0;
+                starting = "";
+                howw = "10 Virus = 1 Day                     1 Virus = 3 Money";
+                regen = "Go to bed to regen your health";
+                startingOptions = "You need to defeat the virus within 30 days";
+                instruct = "Earn money by defeating virus and use it to buy armors";
+                goodluck = "Goodluck and be safe";
+                playy = "Press SPACE to play";
+                
+                break;
+            case KeyEvent.VK_SPACE:
+                health = 30;
+                pera = -10;
+                damage = 10;
+                days = 1;
+                xp = 40;
+                yp = 40;
+                ending = 0;
+                xpyz = 713;
+                xpyz1 = 220;
+                xpyz2 = 260;
+                xpyz3 = 300;
+                xpyz4 = 340;
+                doorCode1 = 1;
+                doorCode2 = 1;
+                doorCode3 = 1;
+                doorCode4 = 1;
+                textRemover = 1;
+                textRemover2 = 1;
+                HP();
+                statusDays = "DAYS: " + days;
+                dead = "";
+                deadButton = "";
+                lowHP = "you need to go to your bed and regen";
+                direction = KeyEvent.VK_SPACE;
+
+            case KeyEvent.VK_S:
+              xp=xp;
+              yp=yp;
+
+        }
+        levelChecker();
+        repaint();
+
+    }
+
+    public static void bolabola() {
+        virusCount++;
+        if (virusCount >= 10) {
+            days += 1;
+
+            virusCount = 1;
+            statusDays = "DAYS: " + days;
+        }
+        int randombolsX = (int) (500.0 * Math.random());
+        int randombolsY = (int) (400.0 * Math.random());
+
+        int randombolsX2 = (int) (500.0 * Math.random());
+        int randombolsY2 = (int) (400.0 * Math.random());
+
+        int randombolsX3 = (int) (500.0 * Math.random());
+        int randombolsY3 = (int) (400.0 * Math.random());
+        
+        int randombolsX4 = (int) (500.0 * Math.random());
+        int randombolsY4 = (int) (400.0 * Math.random());
+        
+        int randombolsX5 = (int) (500.0 * Math.random());
+        int randombolsY5 = (int) (400.0 * Math.random());
+        if (bolsX < 30 || bolsX > 740) {
+            bolsX = randombolsX + 20;
+        } else {
+            bolsX = randombolsX;
+        }
+        if (bolsY < 10 || bolsY > 790) {
+            bolsY = randombolsY + 20;
+        } else {
+            bolsY = randombolsY;
+        }
+        if (bolsX2 < 30 || bolsX2 > 740) {
+            bolsX2 = randombolsX2 + 20;
+        } else {
+            bolsX2 = randombolsX2;
+        }
+        if (bolsY2 < 10 || bolsY2 > 790) {
+            bolsY2 = randombolsY2 + 20;
+        } else {
+            bolsY2 = randombolsY2;
+        }
+        if (bolsX3 < 30 || bolsX3 > 740) {
+            bolsX3 = randombolsX3 + 20;
+        } else {
+            bolsX3 = randombolsX3;
+        }
+        if (bolsY3 < 10 || bolsY3 > 790) {
+            bolsY3 = randombolsY3 + 20;
+        } else {
+            bolsY3 = randombolsY3;
+        }
+        if (bolsX4 < 30 || bolsX4 > 740) {
+            bolsX4 = randombolsX4 + 20;
+        } else {
+            bolsX4 = randombolsX4;
+        }
+        if (bolsY4 < 10 || bolsY4 > 790) {
+            bolsY4 = randombolsY4 + 20;
+        } else {
+            bolsY4 = randombolsY4;
+    }
+        if (bolsX5 < 30 || bolsX5 > 740) {
+            bolsX5 = randombolsX5 + 20;
+        } else {
+            bolsX5 = randombolsX5;
+        }
+        if (bolsY5 < 10 || bolsY5 > 790) {
+            bolsY5 = randombolsY5 + 20;
+        } else {
+            bolsY5 = randombolsY5;
+        }
+    }
+
+    public static void levelChecker() {
+        if (((bolsX) <= (xp + 30) && (bolsX) >= xp - 20) && ((bolsY) <= (yp + 30) && (bolsY) >= yp - 20)) {
+            HP();
+        } else if (((bolsX2) <= (xp + 30) && (bolsX2) >= xp - 20) && ((bolsY2) <= (yp + 30) && (bolsY2) >= yp - 20)) {
+            HP();
+        } else if (((bolsX3) <= (xp + 30) && (bolsX3) >= xp - 20) && ((bolsY3) <= (yp + 30) && (bolsY3) >= yp - 20)) {
+            HP();
+        } else if (((bolsX4) <= (xp + 30) && (bolsX4) >= xp - 20) && ((bolsY4) <= (yp + 30) && (bolsY4) >= yp - 20)) {
+            HP();
+        } else if (((bolsX5) <= (xp + 30) && (bolsX5) >= xp - 20) && ((bolsY5) <= (yp + 30) && (bolsY5) >= yp - 20)) {
+            HP();
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        direction = e.getKeyCode();
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    public static void HP() {
+        pera += 10;
+        health -= damage;
+        if (health <= 0) {
+            deadButton = "(press space to play again)";
+            dead = "YOU DIED";
+            lowHP = "";
+            statusHealth = "";
+            statusMoney = "";
+            days = 1;
+            sister = "";
+            xp = xp;
+            yp = yp;
+            x = 1;
+            y = 1;
+            pera = -10;
+
+        } else {
+            statusHealth = "HP: " + health;
+            statusMoney = "Money: " + pera;
+            bolabola();
+        }
+
+    }
+
+}
+
+public class hos {
+
+    public static void main(String args[]) {
+
+        JFrame frame = new JFrame("COVID-19 FIGHTER");
+        frame.setBounds(400, 150, 800, 630);
+        frame.setResizable(false);
+        rpgPanels pnl = new rpgPanels();
+        pnl.setBackground(Color.GRAY);
+        pnl.setFocusable(true);
+        frame.add(pnl);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setIconImage(new ImageIcon("C:\\Users\\dell.000\\Desktop\\GAMElogo.png/").getImage());
+        frame.setVisible(true);
+
+        while (true) {
+
+            pnl.animate();
+            try {
+                Thread.sleep(100);
+            } catch (Exception e) {
+                System.out.println("EXCEPTION : " + e.toString());
+            }
+
+        }
+    }
+}
